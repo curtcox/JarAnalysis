@@ -34,9 +34,9 @@ final class Class implements Comparable<Class> {
         return shortName().equals(dependency.shortName() + "Impl");
     }
 
-//    public boolean indicatesUsageOf(Uses uses) {
-//        return fullName.contains(uses.text);
-//    }
+    public boolean indicatesUsageOf(Uses uses) {
+        return fullName.contains(uses.text);
+    }
 
     @Override
     public String toString() { return fullName + " in " + jar; }
