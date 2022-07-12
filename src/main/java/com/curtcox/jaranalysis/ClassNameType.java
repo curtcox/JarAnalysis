@@ -7,10 +7,6 @@ final class ClassNameType {
     final String name;
     final Match match;
 
-    ClassNameType(String name) {
-        this(Match.EndsWith,name);
-    }
-
     ClassNameType(Match match,String name) {
         this.match = match;
         this.name = name;
@@ -18,7 +14,20 @@ final class ClassNameType {
 
     private static List<ClassNameType> all = new ArrayList<>();
 
-    static List<ClassNameType> values() { return all; }
+    static void add(String...types) {
+        for (String s : types) {
+            add(s);
+        }
+    }
+
+    static void add(String uses) {
+        String[] parts = uses.split("/");
+        Match match = Match.valueOf(parts[0]);
+        all.add(new ClassNameType(match,parts[1]));
+    }
+
+
+    static ClassNameType[] values() { return all.toArray(new ClassNameType[0]); }
     static ClassNameType from(Class c) {
         for (ClassNameType t : values()) {
             if (t.match.matches(c.shortName(),t.name)) {
@@ -28,5 +37,8 @@ final class ClassNameType {
         return null;
     }
 
-
+    @Override
+    public String toString() {
+        return name;
+    }
 }

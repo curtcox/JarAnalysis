@@ -1,0 +1,1 @@
+jdeps -v --dot-output dots 'target/JarAnalysis-0.0.1-SNAPSHOT.jar'

@@ -41,7 +41,7 @@ final class ClassDescription {
 
     static String csv(Object... values) { return csv(values, Object::toString); }
 
-    static String csv(Object[] values,EnumSet<?> set) { return csv(values, (v) -> set.contains(v) ? v.toString() : ""); }
+    static String csv(Object[] values,Set<?> set) { return csv(values, (v) -> set.contains(v) ? v.toString() : ""); }
 
     static String csv(Object[] values, Function<Object,String> mapper) {
         return Arrays.stream(values).map(mapper).collect(Collectors.joining(","));
