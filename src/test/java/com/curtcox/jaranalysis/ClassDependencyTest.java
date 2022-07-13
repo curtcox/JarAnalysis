@@ -18,4 +18,12 @@ public class ClassDependencyTest {
         assertEquals(Class.forName("y"),dependency.dependency);
     }
 
+    @Test
+    public void unquoted_with_jar_specified() {
+        ClassDependency dependency = ClassDependency.from("c->d (j)");
+        assertEquals(Class.forName("c"),dependency.dependent);
+        assertEquals(Class.forName("d"),dependency.dependency);
+        assertEquals("j",dependency.jar);
+    }
+
 }
