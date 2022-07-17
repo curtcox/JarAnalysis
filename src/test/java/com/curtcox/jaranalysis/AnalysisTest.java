@@ -22,14 +22,14 @@ public class AnalysisTest {
     public void description_from_one_dependency() {
         Analysis analysis = new Analysis();
 
-        analysis.scan(Arrays.asList(ClassDependency.from("c -> d (j)")));
+        analysis.scan(Arrays.asList(ClassDependency.from("c -> d (dj)","cj")));
 
-        Class c = Class.forName("c");
-        ClassDescription description = analysis.classes.get(Class.forName("c"));
+        Class c = Class.forName("c","cj");
+        ClassDescription description = analysis.classes.get(Class.forName("c","cj"));
         assertEquals(c,description.c);
 
-        Class d = Class.forName("d");
-        assertEquals("j",d.jar);
+        Class d = Class.forName("d","dj");
+        assertEquals("dj",d.jar);
     }
 
 }

@@ -6,19 +6,20 @@ final class Class implements Comparable<Class> {
 
     final String fullName;
 
-    String jar;
+    final String jar;
 
     private static Map<String,Class> classes = new HashMap<>();
 
-    private Class(String fullName) {
+    private Class(String fullName, String jar) {
         this.fullName = fullName;
+        this.jar = jar;
     }
 
-    static Class forName(String name) {
+    static Class forName(String name, String jar) {
         if (classes.containsKey(name)) {
             return classes.get(name);
         }
-        Class c = new Class(name);
+        Class c = new Class(name,jar);
         classes.put(name,c);
         return c;
     }

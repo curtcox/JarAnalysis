@@ -121,7 +121,6 @@ final class Analysis {
         for (ClassDependency dep : deps) {
             Class dependent = dep.dependent;
             Class dependency = dep.dependency;
-            dependency.jar = dep.jar;
             classToDependencies.add(dependent, dependency);
             classToDependents.add(dependency, dependent);
             if (dependent.implementsDependency(dependency)) {

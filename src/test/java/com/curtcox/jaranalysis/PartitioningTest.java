@@ -5,18 +5,21 @@ import static org.junit.Assert.*;
 
 public class PartitioningTest {
 
-    Class a = Class.forName("a");
-    Class b = Class.forName("b");
-    Class c = Class.forName("c");
-    Class d = Class.forName("d");
-    Class e = Class.forName("e");
-    Class f = Class.forName("f");
-    Class g = Class.forName("g");
-    Class h = Class.forName("h");
-    Class i = Class.forName("i");
-    Class j = Class.forName("j");
-    Class k = Class.forName("k");
+    Class a = named("a");
+    Class b = named("b");
+    Class c = named("c");
+    Class d = named("d");
+    Class e = named("e");
+    Class f = named("f");
+    Class g = named("g");
+    Class h = named("h");
+    Class i = named("i");
+    Class j = named("j");
+    Class k = named("k");
 
+    static Class named(String name) {
+        return Class.forName(name,"");
+    }
     @Test
     public void can_create() {
         assertNotNull(new Partitioning());
