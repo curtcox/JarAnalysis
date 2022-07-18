@@ -17,7 +17,11 @@ final class Class implements Comparable<Class> {
 
     static Class forName(String name, String jar) {
         if (classes.containsKey(name)) {
-            return classes.get(name);
+            Class existing = classes.get(name);
+            if (existing.jar.equals(jar)) {
+                return existing;
+            }
+            throw new IllegalArgumentException(name + " already exists in different jar.");
         }
         Class c = new Class(name,jar);
         classes.put(name,c);

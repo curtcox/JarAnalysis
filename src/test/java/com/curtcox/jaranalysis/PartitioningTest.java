@@ -5,17 +5,17 @@ import static org.junit.Assert.*;
 
 public class PartitioningTest {
 
-    Class a = named("a");
-    Class b = named("b");
-    Class c = named("c");
-    Class d = named("d");
-    Class e = named("e");
-    Class f = named("f");
-    Class g = named("g");
-    Class h = named("h");
-    Class i = named("i");
-    Class j = named("j");
-    Class k = named("k");
+    Class a = named("pa");
+    Class b = named("pb");
+    Class c = named("pc");
+    Class d = named("pd");
+    Class e = named("pe");
+    Class f = named("pf");
+    Class g = named("pg");
+    Class h = named("ph");
+    Class i = named("pi");
+    Class j = named("pj");
+    Class k = named("pk");
 
     static Class named(String name) {
         return Class.forName(name,"");

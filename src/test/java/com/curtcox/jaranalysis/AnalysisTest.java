@@ -27,9 +27,7 @@ public class AnalysisTest {
         Class c = Class.forName("c","cj");
         ClassDescription description = analysis.classes.get(Class.forName("c","cj"));
         assertEquals(c,description.c);
-
-        Class d = Class.forName("d","dj");
-        assertEquals("dj",d.jar);
+        assertEquals("cj",description.c.jar);
     }
 
 }

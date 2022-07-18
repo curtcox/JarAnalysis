@@ -20,9 +20,9 @@ public class ClassDependencyTest {
 
     @Test
     public void unquoted_with_jar_specified() {
-        ClassDependency dependency = ClassDependency.from("c->d (j)","k");
-        assertEquals(Class.forName("c","k"),dependency.dependent);
-        assertEquals(Class.forName("d","j"),dependency.dependency);
+        ClassDependency dependency = ClassDependency.from("e->f (j)","k");
+        assertEquals(Class.forName("e","k"),dependency.dependent);
+        assertEquals(Class.forName("f","j"),dependency.dependency);
     }
 
 }

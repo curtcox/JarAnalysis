@@ -8,15 +8,14 @@ public class ClassTest {
 
     @Test
     public void forName_with_empty_jar() {
-        Class c = Class.forName("c","");
-        assertEquals("c",c.fullName);
-        assertEquals("",c.jar);
+        Class c = Class.forName("cn","");
+        assertEquals("cn",c.fullName);
     }
 
     @Test
     public void forName_with_jar() {
-        Class d = Class.forName("d","dj");
-        assertEquals("d",d.fullName);
+        Class d = Class.forName("dn","dj");
+        assertEquals("dn",d.fullName);
         assertEquals("dj",d.jar);
     }
 
