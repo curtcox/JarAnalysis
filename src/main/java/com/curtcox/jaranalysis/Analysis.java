@@ -53,9 +53,10 @@ final class Analysis {
         for (Class c : allClassesThatNeedSomething()) {
             ClassDescription description = classes.get(c);
             ClassNameType type = description.root;
-            if (description.root != null) {
-                for (Class dep : findAllDependencies(c)) {
-                    if (classes.containsKey(dep)) {
+            description.allDependencies.addAll(findAllDependencies(c));
+            for (Class dep : description.allDependencies) {
+                if (classes.containsKey(dep)) {
+                    if (description.root != null) {
                         classes.get(dep).markAsUsedBy(type);
                     }
                 }

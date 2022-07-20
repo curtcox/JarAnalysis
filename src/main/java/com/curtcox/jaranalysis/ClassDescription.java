@@ -8,6 +8,8 @@ final class ClassDescription {
     final Class c;
     final ClassNameType root;
     private final Set<ClassNameType> types = new HashSet<>();
+
+    final Set<Class> allDependencies = new HashSet<>();
     final Set<Uses> uses = new HashSet<>();
 
     int partition;

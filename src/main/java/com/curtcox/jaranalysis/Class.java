@@ -28,6 +28,10 @@ final class Class implements Comparable<Class> {
         return c;
     }
 
+    static Class find(String name) {
+        return classes.get(name);
+    }
+
     String shortName() {
         String[] parts = fullName.split("\\.");
         return parts[parts.length-1];
