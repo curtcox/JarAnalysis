@@ -1,15 +1,14 @@
 package com.curtcox.jaranalysis;
 
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.util.stream.*;
 
 final class ClassDescription {
     final Class c;
     final ClassNameType root;
     private final Set<ClassNameType> types = new HashSet<>();
 
-    final Set<Class> allDependencies = new HashSet<>();
+    final Set<Class> allClassDependencies = new HashSet<>();
     final Set<Uses> uses = new HashSet<>();
 
     int partition;
@@ -20,6 +19,10 @@ final class ClassDescription {
         if (root!=null) {
             types.add(root);
         }
+    }
+
+    Set<Jar> allJarDependencies() {
+        return allClassDependencies.stream().map(x -> x.jar).collect(Collectors.toSet());
     }
 
     void markAsUsedBy(ClassNameType type) {
@@ -36,17 +39,13 @@ final class ClassDescription {
         return csv(jar(),root(),partition,csv(ClassNameType.values(),types),c,c.packageName(),c.shortName(),csv(Uses.values(),uses));
     }
 
-    String jar() { return c.jar == null ? "" : c.jar; }
+    Jar jar() { return c.jar; }
     String root() { return root == null ? "" : root.name; }
 
     @Override public String toString() { return c + " " + root + " " + types + " " + uses; }
 
-    static String csv(Object... values) { return csv(values, Object::toString); }
+    static String csv(Object... values) { return CSV.from(values); }
 
-    static String csv(Object[] values,Set<?> set) { return csv(values, (v) -> set.contains(v) ? v.toString() : ""); }
-
-    static String csv(Object[] values, Function<Object,String> mapper) {
-        return Arrays.stream(values).map(mapper).collect(Collectors.joining(","));
-    }
+    static String csv(Object[] values,Set<?> set) { return CSV.from(values, set); }
 
 }

@@ -24,10 +24,10 @@ public class AnalysisTest {
 
         analysis.scan(Arrays.asList(ClassDependency.from("c -> d (dj)","cj")));
 
-        Class c = Class.forName("c","cj");
-        ClassDescription description = analysis.classes.get(Class.forName("c","cj"));
+        Class c = Class.forName("c",Jar.forName("cj"));
+        ClassDescription description = analysis.classes.get(c);
         assertEquals(c,description.c);
-        assertEquals("cj",description.c.jar);
+        assertEquals("cj",description.c.jar.toString());
     }
 
 }

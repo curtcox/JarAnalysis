@@ -13,13 +13,7 @@ final class ClassNameType {
     }
 
     private static List<ClassNameType> all = new ArrayList<>();
-
-    static void add(String...types) {
-        for (String s : types) {
-            add(s);
-        }
-    }
-
+    
     static void add(String uses) {
         String[] parts = uses.split("/");
         Match match = Match.valueOf(parts[0]);

@@ -14,12 +14,16 @@ final class ClassDependency {
     }
 
     static ClassDependency from(String line,String jar) {
-        return new ClassDependency(findDependent(line,jar),findDependency(line,findJar(line)));
+        Class dependent = findDependent(line,jar);
+        Class dependency = findDependency(line,findJar(line));
+        dependent.directDependencies.add(dependency);
+        dependency.directDependents.add(dependent);
+        return new ClassDependency(dependent,dependency);
     }
 
     private static Class findDependency(String line,String jar) {
         String[] parts = line.split("->");
-        return Class.forName(scrub(parts[1]).split(" ")[0],jar);
+        return Class.forName(scrub(parts[1]).split(" ")[0],Jar.forName(jar));
     }
 
     private static String findJar(String line) {
@@ -30,7 +34,7 @@ final class ClassDependency {
 
     private static Class findDependent(String line,String jar) {
         String[] parts = line.split("->");
-        Class c = Class.forName(scrub(parts[0]),jar);
+        Class c = Class.forName(scrub(parts[0]),Jar.forName(jar));
         return c;
     }
 

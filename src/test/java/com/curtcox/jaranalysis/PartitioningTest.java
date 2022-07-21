@@ -18,7 +18,7 @@ public class PartitioningTest {
     Class k = named("pk");
 
     static Class named(String name) {
-        return Class.forName(name,"");
+        return Class.forName(name,Jar.forName(""));
     }
     @Test
     public void can_create() {
