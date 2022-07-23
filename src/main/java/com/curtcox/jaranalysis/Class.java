@@ -55,8 +55,8 @@ final class Class implements Comparable<Class> {
     public String toString() { return fullName + " in " + jar; }
 
     @Override public boolean equals(Object o) {
-        Class c = (Class) o;
-        return fullName.equals(c.fullName);
+        Class that = (Class) o;
+        return fullName.equals(that.fullName);
     }
 
     @Override public int hashCode() {

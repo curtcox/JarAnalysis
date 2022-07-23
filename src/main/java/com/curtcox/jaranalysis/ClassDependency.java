@@ -8,9 +8,12 @@ final class ClassDependency {
     final Class dependent;
     final Class dependency;
 
-    private ClassDependency(Class dependent, Class dependency) {
+    final boolean viaInterface;
+
+    private ClassDependency(Class dependent, Class dependency,boolean viaInterface) {
         this.dependent = dependent;
         this.dependency = dependency;
+        this.viaInterface = viaInterface;
     }
 
     static ClassDependency from(String line,String jar) {
@@ -18,7 +21,7 @@ final class ClassDependency {
         Class dependency = findDependency(line,findJar(line));
         dependent.directDependencies.add(dependency);
         dependency.directDependents.add(dependent);
-        return new ClassDependency(dependent,dependency);
+        return new ClassDependency(dependent,dependency,false);
     }
 
     private static Class findDependency(String line,String jar) {
@@ -72,5 +75,12 @@ final class ClassDependency {
         return lines;
     }
 
+    @Override public boolean equals(Object o) {
+        ClassDependency that = (ClassDependency) o;
+        return dependent.equals(that.dependent) && dependency.equals(that.dependency);
+    }
 
+    @Override public int hashCode() {
+        return dependent.hashCode() ^ dependency.hashCode();
+    }
 }

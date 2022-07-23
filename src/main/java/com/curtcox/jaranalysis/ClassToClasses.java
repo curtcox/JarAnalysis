@@ -19,7 +19,7 @@ final class ClassToClasses {
     }
 
     @SafeVarargs
-    static Set<Class> findAllInDirection(Class key, ClassToClasses... directions) {
+    static Set<Class> findAllClassesInDirection(Class key, ClassToClasses... directions) {
         Set<Class> all = new HashSet<>();
         Set<Class> toDo = new HashSet<>();
         Set<Class> done = new HashSet<>();
