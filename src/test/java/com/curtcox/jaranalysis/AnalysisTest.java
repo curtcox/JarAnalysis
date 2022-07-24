@@ -32,7 +32,7 @@ public class AnalysisTest {
     }
 
     @Test
-    public void scan_() {
+    public void scan_class_with_2_dependencies() {
         scan("j",
                 "with_deps -> wd_d1 (j)",
                 "with_deps -> wd_d2 (j)"
@@ -49,6 +49,31 @@ public class AnalysisTest {
         Class d2 = Class.find("wd_d2");
         assertClasses(d2.directDependents,"with_deps");
         assertClasses(d2.directDependencies);
+    }
+
+    @Test
+    public void scan_simple_dependency_chain() {
+        scan("j",
+                "chain_1 -> chain_2 (j)",
+                "chain_2 -> chain_3 (j)",
+                "chain_3 -> chain_4 (j)"
+        );
+
+        Class c1 = Class.find("chain_1");
+        assertClasses(c1.directDependents);
+        assertClasses(c1.directDependencies,"chain_2");
+
+        Class c2 = Class.find("chain_2");
+        assertClasses(c2.directDependents,"chain_1");
+        assertClasses(c2.directDependencies,"chain_3");
+
+        Class c3 = Class.find("chain_3");
+        assertClasses(c3.directDependents,"chain_2");
+        assertClasses(c3.directDependencies,"chain_4");
+
+        Class c4 = Class.find("chain_4");
+        assertClasses(c4.directDependents,"chain_3");
+        assertClasses(c4.directDependencies);
     }
 
     private void assertClasses(Set<Class> set,String...classes) {
