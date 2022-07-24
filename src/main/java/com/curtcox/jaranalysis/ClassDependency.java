@@ -10,10 +10,14 @@ final class ClassDependency {
 
     final boolean viaInterface;
 
-    private ClassDependency(Class dependent, Class dependency,boolean viaInterface) {
+    private ClassDependency(Class dependent, Class dependency, boolean viaInterface) {
         this.dependent = dependent;
         this.dependency = dependency;
         this.viaInterface = viaInterface;
+    }
+
+    static ClassDependency direct(Class dependent, Class dependency) {
+        return new ClassDependency(dependent,dependency,false);
     }
 
     static ClassDependency from(String line,String jar) {

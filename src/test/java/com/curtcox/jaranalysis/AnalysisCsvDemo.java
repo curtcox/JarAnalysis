@@ -3,7 +3,7 @@ package com.curtcox.jaranalysis;
 import java.io.*;
 import java.util.*;
 
-final class AnalysisDemo {
+final class AnalysisCsvDemo {
     static final File input = new File("dots/JarAnalysis-0.0.1-SNAPSHOT.jar.dot");
     static final File output = new File("dots/classes.csv");
 

@@ -64,7 +64,7 @@ public class AnalysisTest {
     }
 
     @Test
-    public void scan_simple_dependency_chain() {
+    public void simple_dependency_chain_produces_correct_dependnecies() {
         scan("j",
                 "chain_1 -> chain_2 (j)",
                 "chain_2 -> chain_3 (j)",
@@ -86,6 +86,26 @@ public class AnalysisTest {
         Class c4 = Class.find("chain_4");
         assertClasses(c4.directDependents,"chain_3");
         assertClasses(c4.directDependencies);
+    }
+
+    @Test
+    public void dependency_set() {
+        Analysis analysis = scan("j",
+                "chain_1 -> chain_2 (j)",
+                "chain_2 -> chain_3 (j)",
+                "chain_3 -> chain_4 (j)"
+        );
+
+        Set<ClassDependency> set = analysis.dependencyTree(Class.find("chain_1"));
+
+        assertEquals(3,set.size());
+        assertTrue(set.contains(dependency("chain_1","chain_2")));
+        assertTrue(set.contains(dependency("chain_2","chain_3")));
+        assertTrue(set.contains(dependency("chain_3","chain_4")));
+    }
+
+    private ClassDependency dependency(String a, String b) {
+        return ClassDependency.direct(Class.find(a),Class.find(b));
     }
 
     private void assertClasses(Set<Class> set,String...classes) {

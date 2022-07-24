@@ -5,12 +5,12 @@ import java.util.stream.*;
 
 final class Analysis {
 
-    ClassToClasses classToDependencies = new ClassToClasses(); // class -> classes it imports (direct only)
-    ClassToClasses classToDependents = new ClassToClasses(); // class -> classes that import it (directly depend on it)
-    ClassToClasses interfaceToImplementations = new ClassToClasses(); // class -> classes that implement it
-    ClassToClasses dependents = new ClassToClasses(); // class -> classes that depend on it -- including indirectly
-    Map<Uses, Set<Class>> groupDependents = new HashMap<>(); // Uses -> classes that depend on it -- including indirectly
-    Map<Class, ClassDescription> classes = new HashMap<>(); // class -> class description
+    final ClassToClasses classToDependencies = new ClassToClasses(); // class -> classes it imports (direct only)
+    final ClassToClasses classToDependents = new ClassToClasses(); // class -> classes that import it (directly depend on it)
+    final ClassToClasses interfaceToImplementations = new ClassToClasses(); // class -> classes that implement it
+    final ClassToClasses dependents = new ClassToClasses(); // class -> classes that depend on it -- including indirectly
+    final Map<Uses, Set<Class>> groupDependents = new HashMap<>(); // Uses -> classes that depend on it -- including indirectly
+    final Map<Class, ClassDescription> classes = new HashMap<>(); // class -> class description
 
     void scan(List<ClassDependency> lines) {
         addDirectDependents(lines);
@@ -155,4 +155,7 @@ final class Analysis {
         }
     }
 
+    public Set<ClassDependency> dependencyTree(Class c) {
+        return ImplicationFinder.findAllDependnecies(c);
+    }
 }

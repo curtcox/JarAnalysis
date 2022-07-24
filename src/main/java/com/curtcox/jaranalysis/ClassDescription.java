@@ -3,6 +3,8 @@ package com.curtcox.jaranalysis;
 import java.util.*;
 import java.util.stream.*;
 
+import static java.util.Arrays.*;
+
 final class ClassDescription {
     final Class c;
     final ClassNameType root;
@@ -28,15 +30,31 @@ final class ClassDescription {
     void markAsUsedBy(ClassNameType type) {
         types.add(type);
     }
-    static String csvHeader() {
-        return csv("jar","root", "partition", csv(ClassNameType.values()),"fullName","packageName","shortName", csv(Uses.values()));
+    static String csvHeader() { return csv(header()); }
+
+    static String[] header() {
+        List<Object> all = new ArrayList<>();
+        all.addAll(asList("jar","root", "partition"));
+        all.addAll(asList(ClassNameType.values()));
+        all.addAll(asList("fullName","packageName","shortName"));
+        all.addAll(asList(Uses.values()));
+        return all.stream().map(x->x.toString()).collect(Collectors.toList()).toArray(new String[0]);
     }
 
-    public String toCSV() {
+    Object[] values() {
+        List<Object> all = new ArrayList<>();
+        all.addAll(asList(jar(),root(), partition));
+        all.addAll(values(ClassNameType.values(),types));
+        all.addAll(asList(c.fullName,c.packageName(),c.shortName()));
+        all.addAll(values(Uses.values(),uses));
+        return all.toArray(new Object[0]);
+    }
+
+    String toCSV() {
         if (types.isEmpty()) {
             System.out.println(c + " has no types.");
         }
-        return csv(jar(),root(),partition,csv(ClassNameType.values(),types),c,c.packageName(),c.shortName(),csv(Uses.values(),uses));
+        return csv(jar(),root(),partition,csv(ClassNameType.values(),types),c.fullName,c.packageName(),c.shortName(),csv(Uses.values(),uses));
     }
 
     Jar jar() { return c.jar; }
@@ -47,5 +65,9 @@ final class ClassDescription {
     static String csv(Object... values) { return CSV.from(values); }
 
     static String csv(Object[] values,Set<?> set) { return CSV.from(values, set); }
+
+    static List<Boolean> values(Object[] values,Set<?> set) {
+        return stream(values).map(x -> set.contains(x)).collect(Collectors.toList());
+    }
 
 }

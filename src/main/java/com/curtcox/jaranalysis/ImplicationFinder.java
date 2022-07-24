@@ -35,4 +35,19 @@ final class ImplicationFinder {
         return next;
     }
 
+    static Set<ClassDependency> findAllDependnecies(Class c) {
+        Set<ClassDependency> all = new HashSet<>();
+        Set<Class> toDo = new HashSet<>();
+        Set<Class> done = new HashSet<>();
+        toDo.add(c);
+        while (!toDo.isEmpty()) {
+            Class next = take(toDo);
+            for (Class dep : next.directDependencies) {
+                all.add(ClassDependency.direct(next,dep));
+                toDo.add(dep);
+                done.add(next);
+            }
+        }
+        return all;
+    }
 }
