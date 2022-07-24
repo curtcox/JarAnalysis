@@ -111,11 +111,11 @@ final class Analysis {
     }
 
     Set<Class> findAllDependents(Class c) {
-        return ClassToClasses.findAllClassesInDirection(c, classToDependents);
+        return ImplicationFinder.findAllClassesInDirection(c, classToDependents);
     }
 
     Set<Class> findAllDependencies(Class c) {
-        return ClassToClasses.findAllClassesInDirection(c, classToDependencies, interfaceToImplementations);
+        return ImplicationFinder.findAllClassesInDirection(c, classToDependencies, interfaceToImplementations);
     }
 
     void addDirectDependents(List<ClassDependency> deps) {

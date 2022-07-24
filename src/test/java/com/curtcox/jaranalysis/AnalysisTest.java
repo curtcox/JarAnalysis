@@ -32,6 +32,18 @@ public class AnalysisTest {
     }
 
     @Test
+    public void class_depends_on_one_implementing_class() {
+        Analysis analysis = new Analysis();
+
+        analysis.scan(Arrays.asList(ClassDependency.from("c -> d (dj)","cj")));
+
+        Class c = Class.forName("c",Jar.forName("cj"));
+        ClassDescription description = analysis.classes.get(c);
+        assertEquals(c,description.c);
+        assertEquals("cj",description.c.jar.toString());
+    }
+
+    @Test
     public void scan_class_with_2_dependencies() {
         scan("j",
                 "with_deps -> wd_d1 (j)",
