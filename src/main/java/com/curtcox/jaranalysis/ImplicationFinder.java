@@ -42,10 +42,12 @@ final class ImplicationFinder {
         toDo.add(c);
         while (!toDo.isEmpty()) {
             Class next = take(toDo);
+            done.add(next);
             for (Class dep : next.directDependencies) {
                 all.add(ClassDependency.direct(next,dep));
-                toDo.add(dep);
-                done.add(next);
+                if (!done.contains(dep)) {
+                    toDo.add(dep);
+                }
             }
         }
         return all;

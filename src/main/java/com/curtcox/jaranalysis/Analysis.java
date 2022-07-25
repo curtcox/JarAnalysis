@@ -155,7 +155,7 @@ final class Analysis {
         }
     }
 
-    public Set<ClassDependency> dependencyTree(Class c) {
+    Set<ClassDependency> dependencyTree(Class c) {
         return ImplicationFinder.findAllDependnecies(c);
     }
 }
