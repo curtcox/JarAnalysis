@@ -1,4 +1,6 @@
-package com.curtcox.jaranalysis;
+package com.curtcox.jaranalysis.ui;
+
+import com.curtcox.jaranalysis.*;
 
 import javax.swing.event.*;
 import javax.swing.table.*;

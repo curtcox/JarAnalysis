@@ -2,13 +2,13 @@ package com.curtcox.jaranalysis;
 
 import java.util.*;
 
-final class Class implements Comparable<Class> {
+public final class Class implements Comparable<Class> {
 
-    final String fullName;
+    public final String fullName;
 
-    final Jar jar;
+    public final Jar jar;
 
-    final Set<Class> directDependencies = new HashSet<>();
+    public final Set<Class> directDependencies = new HashSet<>();
 
     final Set<Class> directDependents = new HashSet<>();
 
@@ -32,7 +32,7 @@ final class Class implements Comparable<Class> {
         return c;
     }
 
-    static Class find(String name) {
+    public static Class find(String name) {
         return classes.get(name);
     }
 
@@ -41,7 +41,7 @@ final class Class implements Comparable<Class> {
         return parts[parts.length-1];
     }
 
-    String packageName() { return fullName.substring(0,fullName.lastIndexOf(".")); }
+    public String packageName() { return fullName.substring(0,fullName.lastIndexOf(".")); }
 
     boolean implementsDependency(Class dependency) {
         return shortName().equals(dependency.shortName() + "Impl");

@@ -2,7 +2,7 @@ package com.curtcox.jaranalysis;
 
 import java.util.*;
 
-final class ClassNameType {
+public final class ClassNameType {
 
     final String name;
     final Match match;
@@ -14,7 +14,7 @@ final class ClassNameType {
 
     private static List<ClassNameType> all = new ArrayList<>();
 
-    static void add(String uses) {
+    public static void add(String uses) {
         String[] parts = uses.split("/");
         Match match = Match.valueOf(parts[0]);
         all.add(new ClassNameType(match,parts[1]));

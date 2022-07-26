@@ -2,7 +2,7 @@ package com.curtcox.jaranalysis;
 
 import java.util.*;
 
-final class ImplicationFinder {
+public final class ImplicationFinder {
 
     @SafeVarargs
     static Set<Class> findAllClassesInDirection(Class key, ClassToClasses... directions) {
@@ -35,7 +35,7 @@ final class ImplicationFinder {
         return next;
     }
 
-    static Set<ClassDependency> findAllDependnecies(Class c) {
+    public static Set<ClassDependency> findAllDependencies(Class c) {
         Set<ClassDependency> all = new HashSet<>();
         Set<Class> toDo = new HashSet<>();
         Set<Class> done = new HashSet<>();

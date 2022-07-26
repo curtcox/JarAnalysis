@@ -1,4 +1,6 @@
-package com.curtcox.jaranalysis;
+package com.curtcox.jaranalysis.ui;
+
+import com.curtcox.jaranalysis.Class;
 
 import javax.swing.event.*;
 import javax.swing.tree.*;
@@ -7,10 +9,10 @@ import java.util.stream.*;
 
 final class ClassTreeModel implements TreeModel {
 
-    final Class root;
+    final List<Class> root;
 
     ClassTreeModel(Class root) {
-        this.root = root;
+        this.root = Arrays.asList(root);
     }
 
     @Override public Object    getRoot()              { return root; }
@@ -24,10 +26,23 @@ final class ClassTreeModel implements TreeModel {
     @Override public void addTreeModelListener(TreeModelListener l) {}
     @Override public void removeTreeModelListener(TreeModelListener l) {}
 
-    private static List<Class> children(Object o) {
-        Class c = (Class) o;
-        return c.directDependencies.stream()
+    private static List<List<Class>> children(Object o) {
+        List<Class> head = (List<Class>) o;
+        Class last = head.get(head.size()-1);
+        List<Class> tails = last.directDependencies.stream()
+                .filter(x->!head.contains(x))
                 .filter(x->!x.packageName().startsWith("java"))
                 .collect(Collectors.toList());
+        return combine(head,tails);
+    }
+
+    private static List<List<Class>> combine(List<Class> head,List<Class> tails) {
+        return tails.stream().map(x -> append(head,x)).collect(Collectors.toList());
+    }
+
+    private static List<Class> append(List<Class> head, Class tail) {
+        List<Class> all = new ArrayList<>(head);
+        all.add(tail);
+        return all;
     }
 }

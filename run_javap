@@ -1,0 +1,2 @@
+jar='target/JarAnalysis-0.0.1-SNAPSHOT.jar'
+zipinfo -1 ${jar} \*.class| sed 's/\.class//' | xargs javap -classpath "$jar" -c -l -private > javap/JarAnalysis-0.0.1-SNAPSHOT.javap

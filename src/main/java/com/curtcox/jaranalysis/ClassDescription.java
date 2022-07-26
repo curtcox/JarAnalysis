@@ -5,7 +5,7 @@ import java.util.stream.*;
 
 import static java.util.Arrays.*;
 
-final class ClassDescription {
+public final class ClassDescription {
     final Class c;
     final ClassNameType root;
     private final Set<ClassNameType> types = new HashSet<>();
@@ -32,7 +32,7 @@ final class ClassDescription {
     }
     static String csvHeader() { return csv(header()); }
 
-    static String[] header() {
+    public static String[] header() {
         List<Object> all = new ArrayList<>();
         all.addAll(asList("jar","root", "partition"));
         all.addAll(asList(ClassNameType.values()));
@@ -41,7 +41,7 @@ final class ClassDescription {
         return all.stream().map(x->x.toString()).collect(Collectors.toList()).toArray(new String[0]);
     }
 
-    Object[] values() {
+    public Object[] values() {
         List<Object> all = new ArrayList<>();
         all.addAll(asList(jar(),root(), partition));
         all.addAll(values(ClassNameType.values(),types));

@@ -2,7 +2,7 @@ package com.curtcox.jaranalysis;
 
 import java.util.*;
 
-final class Uses {
+public final class Uses {
 
     final String name;
     final String text;
@@ -11,7 +11,7 @@ final class Uses {
 
     static Uses[] values() { return all.toArray(new Uses[0]); }
 
-    static void add(String...uses) {
+    public static void add(String...uses) {
         for (String s : uses) {
             add(s);
         }

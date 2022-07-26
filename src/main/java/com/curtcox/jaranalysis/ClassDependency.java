@@ -3,10 +3,10 @@ package com.curtcox.jaranalysis;
 import java.io.*;
 import java.util.*;
 
-final class ClassDependency {
+public final class ClassDependency {
 
-    final Class dependent;
-    final Class dependency;
+    public final Class dependent;
+    public final Class dependency;
 
     final boolean viaInterface;
 
@@ -63,7 +63,7 @@ final class ClassDependency {
         return line.split("\"")[1];
     }
 
-    static List<ClassDependency> read(File input) throws IOException {
+    public static List<ClassDependency> read(File input) throws IOException {
         List<ClassDependency> lines = new ArrayList<>();
         String jar = "?";
         try (BufferedReader br = new BufferedReader(new FileReader(input))) {
